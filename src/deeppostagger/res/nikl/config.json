@@ -1,0 +1,15 @@
+{
+    "embedding_char_size": 256,
+    "depth":  3,
+    "learning_rate": "0.001 if check_loss > 1 else 0.0005 if check_loss > 0.1 else 0.0002 if check_loss > 0.05 else 0.0001 if check_loss > 0.01 else 0.00005 if check_loss > 0.005 else 0.00007",
+    "check_step": 100,
+    "batch_size": 32, 
+    "chunk_size": 2048,
+    "shuffle_buffer_size": 2000000,
+    "space_remove_select_rate": 0.03, 
+    "space_remove_rate": 0.1,
+    "space_remove_buff_size": 1000, 
+    "max_len": 96,
+    "char_weight":  0.5,
+    "test_rate": 0.02
+}

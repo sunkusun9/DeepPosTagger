@@ -1,0 +1,15 @@
+/.pydevproject
+*.pyc
+__pycache__/
+
+*.egg-info/
+.installed.cfg
+*.egg
+
+/dist/
+
+/src/deeppostagger/train/
+/src/deeppostagger/test/
+
+nohup.out
+hist.p
