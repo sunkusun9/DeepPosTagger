@@ -4,7 +4,7 @@ Sequence-To-Sequence 모델을 활용한 한국어 형태소 분석기
 
 ## 1. 특징
 
-* [세종 말뭉치](https://ithub.korean.go.kr/user/main.do)와 국립국어원의 [모두의 말뭉치](https://corpus.korean.go.kr/) 말뭉치를 사용하여 학습\
+* 세종 말뭉치와 국립국어원의 [모두의 말뭉치](https://corpus.korean.go.kr/) 말뭉치를 사용하여 학습\
   위 말뭉치들를 가공하여 만들어진 약 1,550,000 문장 중에서 약 2%인 31,000을 검증셋으로 사용, 검증셋에 대한 문장 단위 정확도(문장의 태깅 결과가 정확히 일치할 확률)는 69.65% 입니다.
 * LSTM기반에 Sequence-To-Sequence 모델에, 인코더에 LSTM과 Self-Attention Layer를 결합하여 사용하여 성능을 향상.(이 모델은 저자의 아이디어이므로 이를 사용하고자 할 때는 반드시 Reference를 표기 바랍니다.)
 * [세종 품사 태그](http://kkma.snu.ac.kr/documents/?doc=postag) 사용
@@ -72,6 +72,6 @@ print("{}sec".format(timeit.default_timer() - st))
 
 ## 3. 맺음말
 프로그램은 저자의 첫 번쨰 공개 프로젝트입니다. 공개 프로젝트에 대한 경험이 없어 운영이 미숙합니다. 여러 의견 부탁드립니다.
-본 프로그램은 상업적인 사용은 허용하지 않습니다. 만일 필요할 경우 저자에게 연락바랍니다.
+본 프로그램은 상업적인 사용은 허용하지 않습니다.
 
 ※ 학습 데이터 및 모듈은 제공하지 않습니다.

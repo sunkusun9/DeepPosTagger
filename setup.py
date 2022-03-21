@@ -16,7 +16,8 @@ install_requires = [
 print(install_requires)
 setup(
     name = "deeppostagger",
-    version = "0.12",
+    version = "0.14",
+    url = "https://github.com/sunkusun9/DeepPosTagger",
     long_description = long_description(),
     long_description_content_type='text/markdown',
     author="sun9sun9",
@@ -29,6 +30,6 @@ setup(
     },
     package_data = {
         '': ['res/sejong_nikl/model.p', 'res/sejong_nikl/config.json', 'res/sejong_nikl/tokenizer.json']
-    }
-    , exclude_package_data={"": ["README.md"]}
+    }, 
+    exclude_package_data={"": ["README.md"]}
 )
