@@ -25,7 +25,7 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 from deeppostagger import tagger
 
-# decode_net_size: 디코더의 사이즈(동시 처리할 문장의 수, Default: 32, 단 건으로 문장을 처리하는 경우가 많으)
+# decode_net_size: 디코더의 사이즈(동시 처리할 문장의 수, Default: 32, 단 건으로 문장을 처리하는 경우가 많을 경우에는 decode_net_size를 줄이는 것이 성능이 좋다.)
 # lazy_start는 parser의 초기화 시점 지정(True: 처음 parse를 할 때 초기화, False: 태거를 생성할 때 초기화)
 # 출력은 iterable 형태로 나오며, 문단 단위(개행문자 단위로 구분)로 반환이 됩니다.
 _tagger = tagger.create_tagger(lazy_start=False, decode_net_size=8)
