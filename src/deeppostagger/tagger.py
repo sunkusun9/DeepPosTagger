@@ -583,7 +583,7 @@ class Seq2SeqPosTagger():
                 end_.pop(q_)
         return buff_char
 
-def create_tagger(name='sejong_nikl', decode_net_size = 32, lazy_start = True):
+def create_tagger(name='sejong_nikl', decode_net_size = 32, concurrent_sent_size = 8, lazy_start = True):
     gpus = tf.config.experimental.list_physical_devices('GPU')
     if gpus:
         try:
@@ -598,7 +598,7 @@ def create_tagger(name='sejong_nikl', decode_net_size = 32, lazy_start = True):
     config_file = pkg_resources.resource_filename(__name__, os.path.join('res', name, "config.json"))
     #print(tk_file, model_file, config_file)
     tok = Tokenizer.from_file(tk_file)
-    _tagger = Seq2SeqPosTagger(decode_net_size)
+    _tagger = Seq2SeqPosTagger(decode_net_size, concurrent_sent_size)
     with open(config_file, 'r') as f:
         config = json.load(f)
     if not _tagger.load(tok, model_file, config['embedding_char_size'], config['depth'], training=False):

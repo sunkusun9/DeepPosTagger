@@ -16,7 +16,7 @@ install_requires = [
 print(install_requires)
 setup(
     name = "deeppostagger",
-    version = "0.14",
+    version = "0.15",
     url = "https://github.com/sunkusun9/DeepPosTagger",
     long_description = long_description(),
     long_description_content_type='text/markdown',
