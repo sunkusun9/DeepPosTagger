@@ -9,19 +9,21 @@ def long_description():
     return readme
 print(pkgs)
 
-install_requires = []
-if os.path.isfile('requirements.txt'):
-    with open('requirements.txt') as f:
-        install_requires = f.read().splitlines()
-
+install_requires = [
+    "tensorflow>=2.3.0",
+    "tokenizers>=0.11.4"
+    ]
+print(install_requires)
 setup(
     name = "deeppostagger",
-    version = "0.1",
+    version = "0.12",
     long_description = long_description(),
+    long_description_content_type='text/markdown',
     author="sun9sun9",
     author_email="sun9sun9@gmail.com",
     packages = pkgs,
     install_requires=install_requires,
+    setup_requires=install_requires,
     package_dir = {
         '': 'src',
     },

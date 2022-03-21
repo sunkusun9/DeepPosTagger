@@ -286,7 +286,6 @@ class Seq2SeqPosTagger():
     def __init__(self, decode_net_size=32, concurrent_sent_size = 8):
         self.tok = None
         self.embedding_dim_char = 0
-        self.embedding_dim_tag = 0
         self.units = 0
         self.encoder = None
         self.decoder = None
@@ -298,7 +297,7 @@ class Seq2SeqPosTagger():
         self.r_single = re.compile("([\u3130-\u318F])")
         self.r_tag = re.compile("|".join(["\\[/{}\\]".format(i) for i in util.kor_tagset]))
        
-    def create(self, tok, embedding_dim_char, embedding_dim_tag, depth, max_len, training=True):
+    def create(self, tok, embedding_dim_char, depth, max_len, training=True):
         """
         인코더, 디코더를 생성한다
         Parameters
@@ -307,8 +306,6 @@ class Seq2SeqPosTagger():
                 문장 토크나이져
             embedding_dim_char: int
                 문자열 임베딩 사이즈
-            embedding_dim_tag: int
-                태그 임베딩 사이즈
             depth: int
                 RNN Layer의 깊이
             max_len: int
@@ -346,14 +343,13 @@ class Seq2SeqPosTagger():
             pickle.dump(
                 {
                     "embedding_dim_char": self.embedding_dim_char,
-                    "embedding_dim_tag": self.embedding_dim_tag,
                     "depth": self.depth,
                     "encoder": self.encoder.get_weights() if self.encoder is not None else None,
                     "decoder": self.decoder.get_weights() if self.decoder is not None else None,
                     "max_len": self.max_len
                 }, f)
     
-    def load(self, tok, filename, embedding_dim_char, embedding_dim_tag, depth, training=True):
+    def load(self, tok, filename, embedding_dim_char, depth, training=True):
         """
         모델 불러오기.
         파라미터는 이전에 모델의 형태와 현재 모델 형태가 같아야지만 불러와진다.
@@ -365,8 +361,6 @@ class Seq2SeqPosTagger():
                 파일명
             embedding_dim_char: int
                 문자열 임베딩 사이즈
-            embedding_dim_tag: int
-                태그 임베딩 사이즈
             training: bool
                 학습 여부
         Returns:
@@ -377,7 +371,7 @@ class Seq2SeqPosTagger():
         with open(filename, 'rb') as  f:
             obj = pickle.load(f)
         if obj["encoder"] is not None and obj["decoder"] is not None:
-            self.create(tok, embedding_dim_char, embedding_dim_tag, depth, obj.get('max_len', 64), training)
+            self.create(tok, embedding_dim_char, depth, obj.get('max_len', 64), training)
             # 이전 저장된 모델과 현재 모델의 형태가 같을 경우 파라메터를 설정한다
             #if (embedding_dim_char == obj["embedding_dim_char"] and 
             #    fwd_units == obj.get("fwd_units", 0) and bwd_units == obj.get("bwd_units", 0) and
@@ -607,7 +601,7 @@ def create_tagger(name='sejong_nikl', decode_net_size = 32, lazy_start = True):
     _tagger = Seq2SeqPosTagger(decode_net_size)
     with open(config_file, 'r') as f:
         config = json.load(f)
-    if not _tagger.load(tok, model_file, config['embedding_char_size'], config['embedding_tag_size'], config['depth'], training=False):
+    if not _tagger.load(tok, model_file, config['embedding_char_size'], config['depth'], training=False):
         raise Exception("Failed to load model")
     if not lazy_start:
         for _ in _tagger.parse('테스트입니다.'):
