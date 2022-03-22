@@ -18,6 +18,7 @@ setup(
     name = "deeppostagger",
     version = "0.15",
     url = "https://github.com/sunkusun9/DeepPosTagger",
+    description="Sequence-To-Sequence 모델을 활용한 한국어 형태소 분석기",
     long_description = long_description(),
     long_description_content_type='text/markdown',
     author="sun9sun9",
