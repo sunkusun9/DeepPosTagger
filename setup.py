@@ -16,7 +16,7 @@ install_requires = [
 print(install_requires)
 setup(
     name = "deeppostagger",
-    version = "0.15",
+    version = "0.16",
     url = "https://github.com/sunkusun9/DeepPosTagger",
     description="Sequence-To-Sequence 모델을 활용한 한국어 형태소 분석기",
     long_description = long_description(),
